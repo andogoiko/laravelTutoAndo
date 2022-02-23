@@ -9,13 +9,19 @@ class userController extends Controller
     public function index(){
         /** llamamos a la vista simplemente poniendo el nombre del archivo */
         
-        $users = [
-            'Paco',
-            'Carmen',
-            'Joselito',
-            'Alfredo',
-            'Juana'
-        ];
+        if(request()->has('empty')){
+            $users = [];
+        }else{
+            $users = [
+                'Paco',
+                'Carmen',
+                'Joselito',
+                'Alfredo',
+                'Juana'
+            ];
+        }
+
+        
 
         $title = 'Listado de usuarios';
 
@@ -37,10 +43,11 @@ class userController extends Controller
     }
 
     public function show($id){
-        return "Mostrando detalle del usuario: {$id}";
+
+        return view('userShow')->with('id', $id);
     }
 
     public function create(){
-        return 'Crear nuevo usuario';
+        return view('userNew');
     }
 }

@@ -8,9 +8,14 @@ class WelcomeUserController extends Controller
 {
     public function __invoke($name, $nickname = null){
         if($nickname){
-            return "Bienvenido {$name}, tu apodo es: {$nickname}";
+            
+            return view('welcomeUser')
+                ->with('name', $name)
+                ->with('nickname', $nickname);;
         }else{
-            return "Bienvenido {$name}, no tienes apodo";
+            
+            return view('welcomeUserNoNickname')
+                ->with('name', $name);
         }
     }
 }

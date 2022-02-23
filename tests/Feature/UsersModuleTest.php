@@ -23,6 +23,18 @@ class UsersModuleTest extends TestCase
 
     }
 
+    /**
+     * A basic test example.
+     *
+     * @test
+     */
+    function MessageEmptyList()
+    {
+        $this->get('usuarios?empty')
+        ->assertStatus(200)
+            ->assertSee('no hay usuarios registrados');
+    }
+
     /** @test */
     function loadUsersDetails(){
         $this->get('usuarios/5')

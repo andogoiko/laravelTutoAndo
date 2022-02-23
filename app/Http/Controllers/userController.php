@@ -39,15 +39,15 @@ class userController extends Controller
             'title' => 'Listado de usuarios'
         ]); */
 
-        return view('users', compact('title', 'users'));
+        return view('users.index', compact('title', 'users'));
     }
 
     public function show($id){
 
-        return view('userShow')->with('id', $id);
+        return view('users.show')->with('id', $id);
     }
 
     public function create(){
-        return view('userNew');
+        return view('users.new');
     }
 }

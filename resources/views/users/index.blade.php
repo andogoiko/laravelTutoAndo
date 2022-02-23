@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de usuarios - andoPrueba</title>
-</head>
+@section('title', "Mostrar usuarios")
 
-<body>
+@section('content')
     <!-- es lo mismo que ?php echo -->
     <!-- <h1><?= e($title) ?></h1> 
          <ul>
@@ -43,9 +37,9 @@
             <li>no hay usuarios registrados</li>
         @endforelse
     </ul>
+@endsection
 
-    
-
-</body>
-
-</html>
+@section('sidebar')
+@parent
+<h2>Barra lateral personalida</h2>
+@endsection

@@ -2,12 +2,18 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 
 class UsersModuleTest extends TestCase
 {
+
+    //recrea la database antes de ejecutar las pruebas, asií no hay que andar cambiando las variables de entorno
+    use RefreshDatabase;
+
     /**
      * A basic test example.
      *
@@ -15,11 +21,20 @@ class UsersModuleTest extends TestCase
      */
     function LoadUsersList()
     {
+
+        factory(User::class)->create([
+            'name' => 'Paco',
+            'email' => 'Paquisimo@gmail.com',
+            'password' => 'Paco',
+            'profession_id' => null,
+            'is_admin' => true,
+        ]);
+
+
         $this->get('usuarios')
         ->assertStatus(200)
         ->assertSee('Listado de usuarios')
-        ->assertSee('Paco')
-        ->assertSee('Juana');
+        ->assertSee('Paco');
 
     }
 
@@ -30,7 +45,10 @@ class UsersModuleTest extends TestCase
      */
     function MessageEmptyList()
     {
-        $this->get('usuarios?empty')
+
+        //DB::table('users')->truncate();
+
+        $this->get('usuarios')
         ->assertStatus(200)
             ->assertSee('no hay usuarios registrados');
     }

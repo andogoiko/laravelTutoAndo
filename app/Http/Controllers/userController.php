@@ -2,26 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class userController extends Controller
 {
     public function index(){
         /** llamamos a la vista simplemente poniendo el nombre del archivo */
-        
-        if(request()->has('empty')){
-            $users = [];
-        }else{
-            $users = [
-                'Paco',
-                'Carmen',
-                'Joselito',
-                'Alfredo',
-                'Juana'
-            ];
-        }
 
-        
+        //$users = DB::table('users')->get();
+
+        $users = User::all();
 
         $title = 'Listado de usuarios';
 

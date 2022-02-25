@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Profession;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -24,7 +25,10 @@ class User extends Authenticatable
         'is_admin' => 'boolean',
     ];
 
-    
+    public function profession(){
+        return $this->belongsTo(Profession::class);
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

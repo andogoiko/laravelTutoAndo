@@ -38,12 +38,31 @@ class UserSeeder extends Seeder
 
         $profesionId = Profession::where('title', 'Desarrollador Back-end')->value('id');
 
-        User::create([
+        /* User::create([
             'name' => 'Paco',
             'email' => 'Paquisimo@gmail.com',
             'password' => 'Paco',
             //'profession_id' => $profesion->id,
             'profession_id' => $profesionId,
+        ]); */
+
+        /** a la hora de crear mediante factory introduce también el profession_id */
+
+
+        factory(User::class)->create([
+            'name' => 'Paco',
+            'email' => 'Paquisimo@gmail.com',
+            'password' => 'Paco',
+            'profession_id' => $profesionId,
+            'is_admin' => true,
         ]);
+
+        factory(User::class)->create([
+            'profession_id' => $profesionId
+        ]);
+
+        factory(User::class, 48)->create();
+
+        
     }
 }

@@ -66,9 +66,18 @@ class UsersModuleTest extends TestCase
     }
 
     /* @test */
+    function displayError404IfUserNoExist(){
+        $this->get('/usuarios/999')
+        ->assertStatus(404)
+        ->assertSee('Página no encontrada');
+    }
+
+    /* @test */
     function loadNewUserPage(){
         $this->get('/usuarios/nuevo')
         ->assertStatus(200)
         ->assertSee('Crear nuevo usuario');
     }
+
+   
 }

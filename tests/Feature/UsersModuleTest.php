@@ -65,19 +65,33 @@ class UsersModuleTest extends TestCase
         ->assertSee("Alfredo Vidal");
     }
 
-    /* @test */
+    /** @test */
     function displayError404IfUserNoExist(){
         $this->get('/usuarios/999')
         ->assertStatus(404)
         ->assertSee('Página no encontrada');
     }
 
-    /* @test */
+    /** @test */
     function loadNewUserPage(){
         $this->get('/usuarios/nuevo')
         ->assertStatus(200)
-        ->assertSee('Crear nuevo usuario');
+        ->assertSee('Crear usuario');
     }
 
+    /** @test */
+
+    function itCreatesNewUser(){
+        $this->post('/usuarios/', [
+            'name' => 'Duilio',
+            'email' => 'duilio@styde.net',
+            'password' => '123456'
+        ])->assertRedirect('usuarios');
+        $this->assertCredentials([
+            'name' => 'Duilio',
+            'email' => 'duilio@styde.net',
+            'password' => '123456',
+        ]);
+    }
    
 }

@@ -82,6 +82,8 @@ class UsersModuleTest extends TestCase
     /** @test */
 
     function itCreatesNewUser(){
+
+        
         $this->post('/usuarios/', [
             'name' => 'Duilio',
             'email' => 'duilio@styde.net',
@@ -92,6 +94,28 @@ class UsersModuleTest extends TestCase
             'email' => 'duilio@styde.net',
             'password' => '123456',
         ]);
+    }
+
+    /** @test */
+
+    function nameIsRequired()
+    {
+         
+        
+        $this->from('usuarios/nuevo')
+        ->post('/usuarios/', [
+            'name' => '',
+            'email' => 'hola@pruebita.net',
+            'password' => '123456'
+        ])->assertRedirect('usuarios/nuevo')
+        ->assertSessionHasErrors(['name' => 'El campo nombre es obligatorio']);
+
+        $this->assertEquals(0, User::count());
+
+        //$this->assertDatabaseMissing('users', [
+        //    'email'=> 'duilio@styde.net',
+        //]);
+
     }
    
 }

@@ -40,6 +40,10 @@ class userController extends Controller
     }
 
     public function create(){
-        return view('users.new');
+        return view('users.create');
+    }
+
+    public function store(){
+        return 'Procesando información...';
     }
 }

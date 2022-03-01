@@ -34,6 +34,8 @@ Route::get('/usuarios/{user}', 'userController@show')
 ->where('user', '\w+')
 ->name('users.show');
 
+Route::post('usuarios', 'userController@store');
+
 /* parámetros opcionales */
 /* si el controlador solo dispone de 1 método y este se llama __invoke podemos prescindir de llamar al método con @ */
 

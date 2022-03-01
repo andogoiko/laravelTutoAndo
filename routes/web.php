@@ -30,8 +30,8 @@ Route::get('/usuarios/nuevo', 'userController@create')
 /* introduciendo parámetro a través de la url (dinámico) */
 /* laravel nos permite simplificar el recoger el id de usuario colocando {} */
 
-Route::get('/usuarios/{id}', 'userController@show')
-->where('id', '\w+')
+Route::get('/usuarios/{user}', 'userController@show')
+->where('user', '\w+')
 ->name('users.show');
 
 /* parámetros opcionales */

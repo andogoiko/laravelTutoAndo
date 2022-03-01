@@ -46,11 +46,11 @@ class userController extends Controller
     public function store(){
         $data = request()->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => ['required', 'email', 'unique:users,email'], //lo primero es la tabla, lo segundo el campo
             'password' => 'required',
         ], [
             'name.required' => 'El campo nombre es obligatorio'
-        ]);
+        ]);    
 
         User::create([
             'name' => $data['name'],

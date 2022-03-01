@@ -117,5 +117,77 @@ class UsersModuleTest extends TestCase
         ]);
 
     }
+
+    /** @test */
+
+    function emailIsRequired()
+    {
+
+
+        $this->from('usuarios/nuevo')
+            ->post('/usuarios/', [
+                'name' => 'owo',
+                'email' => '',
+                'password' => '123456'
+            ])->assertRedirect('usuarios/nuevo')
+            ->assertSessionHasErrors(['email']);
+
+        $this->assertEquals(0, User::count());
+
+     
+    }
+
+    /** @test */
+
+    function emailMustBeValid()
+    {
+
+        $this->from('usuarios/nuevo')
+            ->post('/usuarios/', [
+                'name' => 'carmen',
+                'email' => 'soy-carmen',
+                'password' => '123456'
+            ])->assertRedirect('usuarios/nuevo')
+            ->assertSessionHasErrors(['email']);
+
+        $this->assertEquals(0, User::count());
+    }
+
+    /** @test */
+
+    function emailMustBeUnique()
+    {
+
+        factory(User::class)->create([
+            'email' => 'factoria@gmail.com'
+        ]);
+
+        $this->from('usuarios/nuevo')
+        ->post('/usuarios/', [
+            'name' => 'factoria',
+            'email' => 'factoria@gmail.com',
+            'password' => '123456'
+        ])->assertRedirect('usuarios/nuevo')
+        ->assertSessionHasErrors(['email']);
+
+        $this->assertEquals(1, User::count());
+    }
+
+    /** @test */
+
+    function passwordIsRequired()
+    {
+
+
+        $this->from('usuarios/nuevo')
+            ->post('/usuarios/', [
+                'name' => 'pipo',
+                'email' => 'pipo@gmail.com',
+                'password' => ''
+            ])->assertRedirect('usuarios/nuevo')
+            ->assertSessionHasErrors(['password']);
+
+        $this->assertEquals(0, User::count());
+    }
    
 }

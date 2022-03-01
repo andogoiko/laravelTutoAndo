@@ -112,9 +112,9 @@ class UsersModuleTest extends TestCase
 
         $this->assertEquals(0, User::count());
 
-        //$this->assertDatabaseMissing('users', [
-        //    'email'=> 'duilio@styde.net',
-        //]);
+        $this->assertDatabaseMissing('users', [
+            'email'=> 'hola@pruebita.net',
+        ]);
 
     }
    

@@ -31,6 +31,8 @@ Route::get('/usuarios/nuevo', 'userController@create')
 
 Route::get("/usuarios/{user}/editar", 'userController@edit')->name('users.edit');
 
+Route::put('/usuarios/{user}', 'userController@update');
+
 /* introduciendo parámetro a través de la url (dinámico) */
 /* laravel nos permite simplificar el recoger el id de usuario colocando {} */
 

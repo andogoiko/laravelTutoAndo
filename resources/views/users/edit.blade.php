@@ -16,7 +16,8 @@
     </div>
     @endif
 
-    <form method="POST" action="{{ url('usuarios') }}">
+    <form method="POST" action="{{ url("usuarios/{$user->id}") }}">
+        {{ method_field('PUT') }}
         {{-- proteger de inyección de datos con este token --}}
         {{ csrf_field() }}
         <label for="name">Nombre</label>

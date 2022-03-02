@@ -337,5 +337,27 @@ class UsersModuleTest extends TestCase
             'password' => $oldPassword //Moito importante
         ]);
     }
+
+    /** @test */
+
+    function itDeletesAUser()
+    {
+
+        
+
+        $user = factory(User::class)->create([
+            'email' => 'pepoclown@gmail.com'
+        ]);
+
+        $this->delete("usuarios/{$user->id}")
+        ->assertRedirect('usuarios');
+
+        $this->assertDatabaseMissing('users', [
+            'id' => $user->id
+        ]);
+
+        $this->assertSame(0, User::count());
+
+    }
    
 }

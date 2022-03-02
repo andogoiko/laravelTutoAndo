@@ -71,7 +71,7 @@ class userController extends Controller
 
         $data['password'] = bcrypt($data['password']);
 
-        $user->update(request()->all());
+        $user->update($data);
 
         return redirect()->route("users.show", ['user' => $user]);
     }

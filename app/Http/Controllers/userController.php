@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class userController extends Controller
 {
@@ -69,7 +70,8 @@ class userController extends Controller
 
         $data = request()->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email',
+            //'email' => 'required|email|unique:users,email,'.$user->id, //excluímos el email del usuario al que se va actualizar
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
             'password' => '',
         ]);
 
